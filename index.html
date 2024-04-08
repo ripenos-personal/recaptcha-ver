@@ -2,12 +2,21 @@
   <head>
     <title>reCAPTCHA demo: Simple page</title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+      function onSubmit(token) {
+        document.getElementById("captcha-status").innerText = "Verification passed";
+        document.querySelector('input[type="submit"]').disabled = false;
+      }
+
+      function onError() {
+        document.getElementById("captcha-status").innerText = "Verification failed";
+      }
+    </script>
   </head>
   <body>
-    <form action="?" method="POST">
-      <div class="g-recaptcha" data-sitekey="6LcfmucnAAAAADxQ8xX27zl_ZICt8RNnUlst95YY"></div>
+      <div class="g-recaptcha" data-sitekey="6LcfmucnAAAAADxQ8xX27zl_ZICt8RNnUlst95YY" data-theme="dark" data-callback="onSubmit" data-error-callback="onError"></div>
       <br/>
-      <input type="submit" value="Submit">
-    </form>
+      <p id="captcha-status"></p>
+      <input type="submit" value="Submit" disabled>
   </body>
 </html>
